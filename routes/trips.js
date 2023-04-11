@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const moment = require('moment')
 
 const fetch = require('node-fetch');
 const Trip = require('../models/trips');
@@ -11,9 +12,19 @@ router.get('/', (req, res) => {
 	});
 });
 
-/* GET researched trips listing. */
+/*
+//data initialisation.
+router.post('/init', (req, res) => {
+	Trip.updateMany({},{selected: false, booked: false}).then(data => {
+		res.json({ trips: data });
+	});
+});
+*/
+
+/* GET research trips listing. */
 router.get('/search', (req, res) => {
-	Trip.find({ departure: req.body.departure, arrival: req.body.arrival, date: req.body.date }).then(data => {
+	const start = moment(req.body.date).startOf('day')
+	Trip.find({ departure: req.body.departure, arrival: req.body.arrival, date: { $gte: start.toDate(), $lte: moment(start).endOf('day').toDate() } }).then(data => {
 		res.json({ trips: data });
 	});
 });
