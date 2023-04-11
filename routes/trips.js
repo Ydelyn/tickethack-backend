@@ -29,10 +29,10 @@ router.post('/search', (req, res) => {
 	});
 });
 
-/* PUT add trip to cart. */
-router.put('/select', (req, res) => {
+/* POST add trip to cart. */
+router.post('/select', (req, res) => {
 	Trip.updateOne({ departure: req.body.departure, arrival: req.body.arrival, date: req.body.date },{ selected: true }).then(data => {
-		res.json({ result: true });
+		res.json({ result: true, data });
 	});
 });
 
