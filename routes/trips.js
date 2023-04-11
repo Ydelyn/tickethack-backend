@@ -36,8 +36,8 @@ router.post('/select', (req, res) => {
 	});
 });
 
-/* PUT remove trip from cart. */
-router.put('/select/remove', (req, res) => {
+/* POST remove trip from cart. */
+router.post('/select/remove', (req, res) => {
 	Trip.updateOne({ departure: req.body.departure, arrival: req.body.arrival, date: req.body.date, selected: true },{ selected: false }).then(data => {
 		res.json({ result: true });
 	});
@@ -50,8 +50,8 @@ router.get('/select', (req, res) => {
 	});
 });
 
-/* PUT book trips. */
-router.put('/book', (req, res) => {
+/* POST book trips. */
+router.post('/book', (req, res) => {
 	Trip.updateMany({ selected: true, booked: false },{ booked: true }).then(data => {
 		res.json({ result: true });
 	});
