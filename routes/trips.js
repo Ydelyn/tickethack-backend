@@ -22,7 +22,7 @@ router.post('/init', (req, res) => {
 */
 
 /* GET research trips listing. */
-router.get('/search', (req, res) => {
+router.post('/search', (req, res) => {
 	const start = moment(req.body.date).startOf('day')
 	Trip.find({ departure: req.body.departure, arrival: req.body.arrival, date: { $gte: start.toDate(), $lte: moment(start).endOf('day').toDate() } }).then(data => {
 		res.json({ trips: data });
