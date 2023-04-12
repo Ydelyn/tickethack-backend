@@ -12,14 +12,14 @@ router.get('/', (req, res) => {
 	});
 });
 
-/*
+
 //data initialisation.
 router.post('/init', (req, res) => {
 	Trip.updateMany({},{selected: false, booked: false}).then(data => {
 		res.json({ trips: data });
 	});
 });
-*/
+
 
 /* GET research trips listing. */
 router.post('/search', (req, res) => {
